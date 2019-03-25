@@ -11,18 +11,24 @@ wb_obj = load_workbook(filename = file)
 
 wsheet = wb_obj['MOCK_DATA']
 
-#dictionary to store data
+#store data in a dictionary for convenience
 dataDict = {}
 value = []
-row_count = wsheet.max_row
-col_count = wsheet.max_column
 
-for key, *values in wsheet.iter_rows():
+for key, *values in wsheet.iter_rows(min_row=2):
     dataDict[key.value] = [v.value for v in values]
 
-print (dataDict)
+# print ("Contents of your spreadsheet :\n",dataDict)
 
-#prompt user for input
-userInput = input("Please enter an id to find a person's details: ")
+#prompt user for input(ID)
+userInput = input("Please enter an ID of a person to find a his/her details: ")
 
-print (dataDict.get(int(userInput)))
+#print details of a person associated with above ID
+
+if (int(userInput)) in dataDict:
+
+    print("Details requested for the ID:",int(userInput))
+
+    print(dataDict.get(int(userInput)))
+else:
+    print("The ID",userInput,"is not found. Please enter a valid id")
