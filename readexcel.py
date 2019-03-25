@@ -13,7 +13,6 @@ wsheet = wb_obj['MOCK_DATA']
 
 #store data in a dictionary for convenience
 dataDict = {}
-value = []
 
 for key, *values in wsheet.iter_rows(min_row=2):
     dataDict[key.value] = [v.value for v in values]
